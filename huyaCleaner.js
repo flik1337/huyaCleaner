@@ -2,11 +2,11 @@
     // @name         huyaCleaner 虎牙去广告|简洁模式
     // @namespace    http://tampermonkey.net/
     // @version      0.1
-    // @description  try to take over the world!
+    // @description  虎牙去广告|简洁模式
     // @author       flik
     // @match        https://www.huya.com/*
     // @match        https://zt.huya.com/*/mobile/index.html/*
-    // @icon         https://a.msstatic.com/huya/main3/assets/img/room/sub-logo_ed1c4.png
+    // @icon         https://www.huya.com/favicon.ico
     // @grant        GM_addStyle
     // @grant        GM_setValue
     // @grant        GM_getValue
@@ -59,12 +59,16 @@
             }
         `
         let competitionAdCss = `
-        .competition_cont_center_wrap{
-            display:none;
-        }
+            .competition_cont_center_wrap{
+                display:none;
+            }
         `
-
-        function removeAds(){
+        let siderBarAdCss = `
+            #sidebarBanner{
+                display:none;
+            }
+        `
+        function removeAdCss() {
             GM_addStyle(topBannerCss)
             GM_addStyle(compAdCss)
             GM_addStyle(mainAdCss)
@@ -72,18 +76,31 @@
             GM_addStyle(businessGameAdCss)
             GM_addStyle(downloadAppAdCss)
             GM_addStyle(competitionAdCss)
+            GM_addStyle(siderBarAdCss)
+
+        }
+
+        function removeAdComp(){
+
+            setTimeout(() => {
+                // 坐骑商店
+                $("#diy-pet-icon").get(0).remove()
+                // 周星
+                $("#week-star-btn").get(0).remove()
+                // 更多
+                $(".more-activity-icon").get(0).remove()
+                // 极乐
+                $("#J_treasureChestContainer").get(0).remove()
+                
+            }, 2000);
 
             setTimeout(() => {
                 // 弹幕区iframe广告
                 //https://zt.huya.com/24407/mobile/index.html?isPortrait=1&use304Cache=1&useLoading=0&useCloseHide=1&web=1&scale=1&anchorUid=10748220&channelId=10748220&SubChannelId=10748220&anchorYYId=20540844
-                $(".chat-room__bd iframe").get(0).remove()
+                //$(".chat-room__bd iframe").get(0).remove()
+                $("iframe").remove()
             }, 3000);
 
-            // 坐骑商店
-            $("#diy-pet-icon").get(0).remove()
-
-            // 周星
-            $("#week-star-btn").get(0).remove()
         }
 
         function shieldVideoEffect() {
@@ -102,9 +119,14 @@
                 
             },3000)
         }
+        function removePageFooter(){
+            $(".room-footer").remove()
+        }
 
+        removeAdCss()
         window.onload = function () {
-            removeAds()
+            removeAdComp()
+            removePageFooter()
             shieldVideoEffect()
         }
 
