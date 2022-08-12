@@ -12,7 +12,6 @@
     // @grant        GM_getValue
     // ==/UserScript==
 
-
     (function() {
         'use strict';
         // 顶部广告
@@ -68,6 +67,7 @@
                 display:none;
             }
         `
+        // 移除样式
         function removeAdCss() {
             GM_addStyle(topBannerCss)
             GM_addStyle(compAdCss)
@@ -79,7 +79,7 @@
             GM_addStyle(siderBarAdCss)
 
         }
-
+        // 移除广告组件
         function removeAdComp(){
 
             setTimeout(() => {
@@ -102,7 +102,7 @@
             }, 3000);
 
         }
-
+        // 关闭视频区特效
         function shieldVideoEffect() {
             setTimeout(function(){
                 // 通过模拟鼠标悬浮，加载屏蔽设置dom
@@ -113,21 +113,43 @@
                     // 勾选未选择的视频区特效
                     if(!$(shieldItem).hasClass("shield-cked")){
                         shieldItem.click()
-
                     }
                 })
                 
             },3000)
         }
-        function removePageFooter(){
-            $(".room-footer").remove()
+
+        // 关闭右侧弹幕特效
+        // 无法获取到弹幕特效面板信息，因此控制外部按钮
+        function shieldChatEffect() {
+            setTimeout(() => {
+                let $chatEffectShieldBtn = $("#J-room-chat-shield").eq(0)
+
+                $chatEffectShieldBtn.click()
+                // 情况1：之前均未选择，点击后按钮为选中状态
+                // 情况2：之前部分选择，点击后按钮为选中状态
+                // 情况3：之前全部选择，点击后按钮为位选中状态
+
+                // 情况3
+                if(!$chatEffectShieldBtn.hasClass("shield-on")){
+                    $chatEffectShieldBtn.click()
+                }
+            }, 3000);
+
         }
 
+        // 关闭底部信息区(动态)
+        function removePageFooter(){
+            $("room-footer").remove()
+        }
+        
+        // 执行
         removeAdCss()
         window.onload = function () {
             removeAdComp()
             removePageFooter()
             shieldVideoEffect()
+            shieldChatEffect()
         }
 
     })();
