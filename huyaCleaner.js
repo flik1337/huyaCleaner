@@ -1,8 +1,8 @@
     // ==UserScript==
-    // @name         huyaCleaner 虎牙去广告|简洁模式
-    // @namespace    http://tampermonkey.net/
-    // @version      0.1
-    // @description  虎牙去广告|简洁模式
+    // @name         huyaCleaner 虎牙直播 去广告|去特效|简洁模式
+    // @namespace    https://flik1337.com
+    // @version      1.0.0
+    // @description  虎牙直播网页 去广告|去特效|简洁模式
     // @author       flik
     // @match        https://www.huya.com/*
     // @match        https://zt.huya.com/*/mobile/index.html/*
