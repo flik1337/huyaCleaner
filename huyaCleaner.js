@@ -1,10 +1,11 @@
     // ==UserScript==
-    // @name         huyaCleaner 虎牙去广告|简洁模式 
+    // @name         huyaCleaner 虎牙去广告|简洁模式
     // @namespace    http://tampermonkey.net/
     // @version      0.1
     // @description  try to take over the world!
     // @author       flik
     // @match        https://www.huya.com/*
+    // @match        https://zt.huya.com/*/mobile/index.html/*
     // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
     // @grant        GM_addStyle
     // @grant        GM_setValue
@@ -23,13 +24,15 @@
             background-image:none !important;
             height:20px !important;
         }
-        `   
+        `
         // 组件广告
         let compAdCss =   `
-            .diy-comps-wrap{
-                display:none;
+            .diy-comps-wrap,
+            .diy-comp{
+                display:none !important;
             }
         `
+        
         // 底部广告
         let mainAdCss =   `
             .main-room{
@@ -61,12 +64,48 @@
         }
         `
 
-        GM_addStyle(topBannerCss)
-        GM_addStyle(compAdCss)
-        GM_addStyle(mainAdCss)
-        GM_addStyle(videoBannerAdCss)
-        GM_addStyle(businessGameAdCss)
-        GM_addStyle(downloadAppAdCss)
-        GM_addStyle(competitionAdCss)
+        function removeAds(){
+            GM_addStyle(topBannerCss)
+            GM_addStyle(compAdCss)
+            GM_addStyle(mainAdCss)
+            GM_addStyle(videoBannerAdCss)
+            GM_addStyle(businessGameAdCss)
+            GM_addStyle(downloadAppAdCss)
+            GM_addStyle(competitionAdCss)
+
+            setTimeout(() => {
+                // 弹幕区iframe广告
+                //https://zt.huya.com/24407/mobile/index.html?isPortrait=1&use304Cache=1&useLoading=0&useCloseHide=1&web=1&scale=1&anchorUid=10748220&channelId=10748220&SubChannelId=10748220&anchorYYId=20540844
+                $(".chat-room__bd iframe").get(0).remove()
+            }, 3000);
+
+            // 坐骑商店
+            $("#diy-pet-icon").get(0).remove()
+
+            // 周星
+            $("#week-star-btn").get(0).remove()
+        }
+
+        function shieldVideoEffect() {
+            setTimeout(function(){
+                // 通过模拟鼠标悬浮，加载屏蔽设置dom
+                $("#shielding-effect").mouseover()
+                $("#shielding-effect").mouseleave()
+
+                $(".shield-set-list li").each(function (index,shieldItem) {
+                    // 勾选未选择的视频区特效
+                    if(!$(shieldItem).hasClass("shield-cked")){
+                        shieldItem.click()
+
+                    }
+                })
+                
+            },3000)
+        }
+
+        window.onload = function () {
+            removeAds()
+            shieldVideoEffect()
+        }
 
     })();
