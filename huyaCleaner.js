@@ -6,7 +6,7 @@
     // @author       flik
     // @match        https://www.huya.com/*
     // @match        https://zt.huya.com/*/mobile/index.html/*
-    // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
+    // @icon         https://a.msstatic.com/huya/main3/assets/img/room/sub-logo_ed1c4.png
     // @grant        GM_addStyle
     // @grant        GM_setValue
     // @grant        GM_getValue
