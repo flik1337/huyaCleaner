@@ -1,5 +1,5 @@
     // ==UserScript==
-    // @name         纯净虎牙
+    // @name         huyaCleaner 虎牙去广告|简洁模式 
     // @namespace    http://tampermonkey.net/
     // @version      0.1
     // @description  try to take over the world!
