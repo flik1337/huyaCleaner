@@ -1,7 +1,7 @@
     // ==UserScript==
     // @name         huyaCleaner 虎牙直播 去广告|去特效|简洁模式
     // @namespace    https://flik1337.com
-    // @version      1.0.0
+    // @version      1.0.1
     // @description  虎牙直播网页 去广告|去特效|简洁模式
     // @author       flik
     // @match        https://www.huya.com/*
@@ -31,7 +31,13 @@
                 display:none !important;
             }
         `
-        
+        // 右侧顶部广告
+
+        let siderBarTop = `
+            .room-sidebar-top{
+                display:none !important;
+            }
+        `
         // 底部广告
         let mainAdCss =   `
             .main-room{
@@ -77,6 +83,7 @@
             GM_addStyle(downloadAppAdCss)
             GM_addStyle(competitionAdCss)
             GM_addStyle(siderBarAdCss)
+            GM_addStyle(siderBarTop)
 
         }
         // 移除广告组件
@@ -98,7 +105,9 @@
                 // 弹幕区iframe广告
                 //https://zt.huya.com/24407/mobile/index.html?isPortrait=1&use304Cache=1&useLoading=0&useCloseHide=1&web=1&scale=1&anchorUid=10748220&channelId=10748220&SubChannelId=10748220&anchorYYId=20540844
                 //$(".chat-room__bd iframe").get(0).remove()
-                $("iframe").remove()
+                // $("iframe").remove()
+                $("iframe").not("#UDBSdkLgn_iframe").remove();
+
             }, 3000);
 
         }
