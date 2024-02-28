@@ -1,5 +1,5 @@
 # 虎牙直播 去广告插件
-github:https://github.com/flik1337/huyaCleaner
+greasy-fork: https://greasyfork.org/zh-CN/scripts/449446-huyacleaner-%E8%99%8E%E7%89%99%E7%9B%B4%E6%92%AD-%E5%8E%BB%E5%B9%BF%E5%91%8A-%E5%8E%BB%E7%89%B9%E6%95%88-%E7%AE%80%E6%B4%81%E6%A8%A1%E5%BC%8F
 
 若喜欢该插件，欢迎star😬
 ### 更新
